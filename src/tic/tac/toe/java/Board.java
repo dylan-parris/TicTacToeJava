@@ -5,112 +5,132 @@ package tic.tac.toe.java;
  */
 public class Board {
     int[][] board;
-    int size;
-    
+    public static final int SIZE = 3;
+    public static final int EMPTY = 0;
+    public static final int X = 1;
+    public static final int Y = 2;
     
     public Board(){
-        size = 3;
-        board = new int[size][size];
+        board = new int[SIZE][SIZE];
         initBoard();
     }
     
     protected final void initBoard(){
-        for(int i = 0; i < size; i++){
-            for( int j = 0; j < size; j++){
-                board[i][j] = 0;
+        for(int i = 0; i < SIZE; i++){
+            for( int j = 0; j < SIZE; j++){
+                board[i][j] = EMPTY;
             }
         }
     }
     
+    public boolean placeX(int[] move){
+        return placeX(move[0], move[1]);
+    }
+    
     public boolean placeX(int row, int col){
-        if(board[row][col] == 0){
-            board[row][col] = 1;
+        if(board[row][col] == EMPTY){
+            board[row][col] = X;
             return true;
         }
         return false;
     }
     
+    public boolean placeO(int[] move){
+        return placeO(move[0],move[1]);
+    }
+    
     public boolean placeO(int row, int col){
-        if(board[row][col] == 0){
-            board[row][col] = 2;
+        if(board[row][col] == EMPTY){
+            board[row][col] = Y;
             return true;
         }
         return false;
     }
     
     public void drawBoard(){
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < SIZE; i++) {
             String line = "";
-            for (int j = 0; j < size; j++) {
+            for (int j = 0; j < SIZE; j++) {
                 line += " ";
                 switch(board[i][j]){
-                    case 1: line += "X";
+                    case X: line += "X";
                             break;
-                    case 2: line += "O";
+                    case Y: line += "O";
                             break;
                     default: line += " ";
                             break;
                 }
-                if (j != size - 1) {
+                if (j != SIZE - 1) {
                     line += " |";
                 }
             }
             System.out.println(line);
-            if (i != size - 1) {
+            if (i != SIZE - 1) {
                 System.out.println("--- --- ---");
             }
         }
      System.out.println("");
     }
     
+    public boolean validInput(int row, int col){
+        if(row >= SIZE || col >= SIZE){
+            return false;
+        } else if(row < 0 || col < 0){
+            return false;
+        } else if(get(row,col) != EMPTY){
+            return false;
+        }
+        return true;
+    }
+    
     public int get(int row, int col){
         return board[row][col];
     }
     
-    public int checkForWin(){
-        int rowWins = checkRowWins();
-        int colWins = checkColWins();
-        if(rowWins != 0){
+    public boolean checkForWin(){
+        boolean rowWins = checkRowWins();
+        boolean colWins = checkColWins();
+        if(rowWins){
             return rowWins;
-        } else if(colWins != 0){
+        } else if(colWins){
             return colWins;
         }
-        return 0;
+        return false;
     }
     
-    public int checkRowWins(){
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
-                if(board[i][j] != board[i][0]){
+    public boolean checkRowWins(){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                if(board[i][j] != board[i][0] || board[i][j] == EMPTY){
                     break;
                 }
-                if(j == size - 1){
-                    return board[i][j];
+                if(j == SIZE - 1){
+                    return true;
                 }
             }
         }
-        return 0;
+        return false;
     }
     
-    public int checkColWins(){
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
-                if(board[j][i] != board[0][i]){
+    public boolean checkColWins(){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                if(board[j][i] != board[0][i] || board[i][j] == EMPTY){
                     break;
                 }
-                if(j == size - 1){
-                    return board[j][i];
+                if(j == SIZE - 1){
+                    return true;
                 }
             }
         }
-        return 0;
+        return false;
     }
     
     private int countFreeSpaces(){
         int count = 0;
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++){
-                if(board[i][j] == 0){
+        for(int i = 0; i < SIZE; i++){
+            for(int j = 0; j < SIZE; j++){
+                if(board[i][j] == EMPTY){
                     count++;
                 }
             }
@@ -119,6 +139,6 @@ public class Board {
     }
     
     public boolean isBoardFull(){
-        return countFreeSpaces() == 0;
+        return countFreeSpaces() == EMPTY;
     }
 }
