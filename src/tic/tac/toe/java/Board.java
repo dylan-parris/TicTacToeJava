@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tic.tac.toe.java;
 
 /**
- *
- * @author Dylan
+ * @author Dylan Parris
  */
 public class Board {
     int[][] board;
@@ -72,6 +66,7 @@ public class Board {
     public int get(int row, int col){
         return board[row][col];
     }
+    
     public int checkForWin(){
         int rowWins = checkRowWins();
         int colWins = checkColWins();
@@ -82,6 +77,7 @@ public class Board {
         }
         return 0;
     }
+    
     public int checkRowWins(){
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
@@ -108,5 +104,21 @@ public class Board {
             }
         }
         return 0;
+    }
+    
+    private int countFreeSpaces(){
+        int count = 0;
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(board[i][j] == 0){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    
+    public boolean isBoardFull(){
+        return countFreeSpaces() == 0;
     }
 }

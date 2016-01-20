@@ -32,6 +32,10 @@ public class TicTacToeJava {
     }
     public static void gameplay(Board board){
         while (true){
+            if(board.isBoardFull()){
+                System.out.println("Draw!");
+                break;
+            }
             if(player1Turn){
                 System.out.println("Player 1's Turn");
             } else {
