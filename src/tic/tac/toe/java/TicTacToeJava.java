@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 package tic.tac.toe.java;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
  * @author Dylan

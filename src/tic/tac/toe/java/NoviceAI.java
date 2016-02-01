@@ -11,8 +11,6 @@ import java.util.Random;
  */
 public class NoviceAI implements Player{
     private String name;
-    private int peice;
-    //private Board board;
     
     NoviceAI(String n){
         name = n;
@@ -20,10 +18,6 @@ public class NoviceAI implements Player{
     
     NoviceAI(String n, Board b){
         name = n;
-    }
-    
-    public void setXorO(int a){
-        peice = a;
     }
     
     private int randomInt(int max){

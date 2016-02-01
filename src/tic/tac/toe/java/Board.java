@@ -15,7 +15,7 @@ public class Board {
         initBoard();
     }
     
-    protected final void initBoard(){
+    private void initBoard(){
         for(int i = 0; i < SIZE; i++){
             for( int j = 0; j < SIZE; j++){
                 board[i][j] = EMPTY;
