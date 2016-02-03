@@ -39,6 +39,7 @@ public class TicTacToeJava {
         System.out.println("--------------------------");
         System.out.println("1. Another person");
         System.out.println("2. Novice Computer Player");
+        System.out.println("3. Advanced Computer Player");
         
         System.out.println("Enter the cooresponding number: ");
         Scanner s = new Scanner(System.in);
@@ -50,6 +51,8 @@ public class TicTacToeJava {
             case 2: 
                 player2 = new NoviceAI("");
                 break;
+            case 3:
+                player2 = new AdvancedAI("", Board.O);
         }
     }
     

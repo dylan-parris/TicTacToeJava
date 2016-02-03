@@ -8,7 +8,7 @@ public class Board {
     public static final int SIZE = 3;
     public static final int EMPTY = 0;
     public static final int X = 1;
-    public static final int Y = 2;
+    public static final int O = -1;
     
     public Board(){
         board = new int[SIZE][SIZE];
@@ -20,6 +20,14 @@ public class Board {
             for( int j = 0; j < SIZE; j++){
                 board[i][j] = EMPTY;
             }
+        }
+    }
+    
+    public boolean placePiece(int[] a, int piece){
+        if(piece == X){
+            return placeX(a);
+        } else {
+            return placeO(a);
         }
     }
     
@@ -41,7 +49,7 @@ public class Board {
     
     public boolean placeO(int row, int col){
         if(board[row][col] == EMPTY){
-            board[row][col] = Y;
+            board[row][col] = O;
             return true;
         }
         return false;
@@ -55,7 +63,7 @@ public class Board {
                 switch(board[i][j]){
                     case X: line += "X";
                             break;
-                    case Y: line += "O";
+                    case O: line += "O";
                             break;
                     default: line += " ";
                             break;
