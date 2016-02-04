@@ -11,4 +11,7 @@ package tic.tac.toe.java;
  */
 public interface Player {
     public int[] makeMove(Board b);
+    public int getXorO();
+    public void setXorO(int a);
+    public String getName();
 }

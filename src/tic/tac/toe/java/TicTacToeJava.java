@@ -4,11 +4,7 @@
  * and open the template in the editor.
  */
 package tic.tac.toe.java;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author Dylan
@@ -18,19 +14,21 @@ public class TicTacToeJava {
     static Board board;
     static HumanPlayer player1;
     static Player player2;
+    static Scanner s;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        s = new Scanner(System.in);
         initGame();
         board.drawBoard();
         gameplay(board);
+        s.close();
     }
     
     private static void initGame(){
         board = new Board();
         System.out.print("Enter your name: ");
-        Scanner s = new Scanner(System.in);
         player1 = new HumanPlayer(s.nextLine());
         selectPlayer2();
     }
@@ -43,30 +41,37 @@ public class TicTacToeJava {
         System.out.println("2. Novice Computer Player");
         
         System.out.println("Enter the cooresponding number: ");
-        Scanner s = new Scanner(System.in);
+        
         int p2Type = s.nextInt();
         switch(p2Type){
-            case 1: 
+            case 1:
                 player2 = new HumanPlayer("Test");
                 break;
-            case 2: 
+            case 2:
                 player2 = new NoviceAI("");
                 break;
+
         }
     }
     
     
     public static void gameplay(Board board){
-        
-        while (true){
+        player1.setXorO(Board.X);
+        player2.setXorO(Board.Y);
+        while (!board.checkForWin()){
             if(board.isBoardFull()){
                 System.out.println("Draw!");
                 break;
             }
+                        
             if(player1Turn){
                 System.out.println("Player 1's Turn");
+                playerTurn(player1);
+                player1Turn = false;
             } else {
-                 System.out.println("Player 2's Turn");
+                System.out.println("Player 2's Turn");
+                playerTurn(player2);
+                player1Turn = true;
             }
             
             
@@ -78,18 +83,15 @@ public class TicTacToeJava {
                     board.drawBoard();
                     break;
                 }
-                player1Turn = false;
-            } else {
-                int[] p2Move = player2.makeMove(board);
-                board.placeO(p2Move);
-                if(board.checkForWin()){
-                    System.out.println("Player 2 Wins!");
-                    break;
-                }
-                player1Turn = true;
             }
-            
-            board.drawBoard();
+        }
+    }
+    
+    private static void playerTurn(Player player){
+        int[] pMove = player.makeMove(board);
+        board.placeXorO(pMove, player.getXorO());
+        if(board.checkForWin()){
+            System.out.println(player.getName() + " Wins!");
         }
     }
 

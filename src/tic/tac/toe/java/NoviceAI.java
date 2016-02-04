@@ -21,7 +21,7 @@ public class NoviceAI implements Player{
     NoviceAI(String n, Board b){
         name = n;
     }
-    
+
     public void setXorO(int a){
         peice = a;
     }
@@ -46,5 +46,15 @@ public class NoviceAI implements Player{
         }
         int[] move = {row, col};
         return move;
+    }
+
+    @Override
+    public int getXorO() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
