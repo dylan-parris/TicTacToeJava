@@ -51,10 +51,10 @@ public class TicTacToeJava {
                 player2 = new HumanPlayer("Test");
                 break;
             case 2:
-                player2 = new NoviceAI("");
+                player2 = new NoviceAI("Player 2");
                 break;
             case 3:
-                player2 = new AdvancedAI("", Board.O);
+                player2 = new AdvancedAI("Player 2", Board.O);
         }
     }
     
@@ -78,16 +78,8 @@ public class TicTacToeJava {
                 player1Turn = true;
             }
             
+            board.drawBoard();
             
-            if(player1Turn){
-                int[] p1Move = player1.makeMove(board);
-                board.placeX(p1Move);
-                if(board.checkForWin()){
-                    System.out.println("Player 1 Wins!");
-                    board.drawBoard();
-                    break;
-                }
-            }
         }
     }
     

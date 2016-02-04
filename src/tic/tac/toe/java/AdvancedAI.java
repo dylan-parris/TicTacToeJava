@@ -13,13 +13,13 @@ package tic.tac.toe.java;
 public class AdvancedAI implements Player{
 
     String name;
-    private int gamePeice;
+    private int gamePiece;
     
     AdvancedAI(){}
     
     AdvancedAI(String n, int gp){
         name = n;
-        gamePeice = gp;
+        gamePiece = gp;
     }
     
     @Override
@@ -29,18 +29,18 @@ public class AdvancedAI implements Player{
             int[] move;
             
             //check for winning move
-            move = checkFor2InRow(b, gamePeice);
+            move = checkFor2InRow(b, gamePiece);
             if(move != null){
                 return move;
             }
-            move = checkFor2InRow(b,gamePeice*-1);
+            move = checkFor2InRow(b,gamePiece*-1);
             if(move != null){
                 return move;
             }
             
             //Find best possible move
                 //check for winning move
-                move = checkFor2InRow(b, gamePeice);
+                move = checkFor2InRow(b, gamePiece);
                 if(move != null){
                     return move;
                 }
@@ -96,16 +96,16 @@ public class AdvancedAI implements Player{
 
     @Override
     public int getXorO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gamePiece;
     }
 
     @Override
     public void setXorO(int a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        gamePiece = a;
     }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return name;
     }
 }
