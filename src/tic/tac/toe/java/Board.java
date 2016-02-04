@@ -8,14 +8,14 @@ public class Board {
     public static final int SIZE = 3;
     public static final int EMPTY = 0;
     public static final int X = 1;
-    public static final int Y = -1;
+    public static final int O = -1;
     
     public Board(){
         board = new int[SIZE][SIZE];
         initBoard();
     }
     
-    protected final void initBoard(){
+    private void initBoard(){
         for(int i = 0; i < SIZE; i++){
             for( int j = 0; j < SIZE; j++){
                 board[i][j] = EMPTY;
@@ -23,11 +23,11 @@ public class Board {
         }
     }
     
-    public boolean placeXorO(int[] move, int XorO){
-        if(XorO == X){
-            return placeX(move);
+    public boolean placePiece(int[] a, int piece){
+        if(piece == X){
+            return placeX(a);
         } else {
-            return placeO(move);
+            return placeO(a);
         }
     }
     
@@ -49,7 +49,7 @@ public class Board {
     
     public boolean placeO(int row, int col){
         if(board[row][col] == EMPTY){
-            board[row][col] = Y;
+            board[row][col] = O;
             return true;
         }
         return false;
@@ -63,7 +63,7 @@ public class Board {
                 switch(board[i][j]){
                     case X: line += "X";
                             break;
-                    case Y: line += "O";
+                    case O: line += "O";
                             break;
                     default: line += " ";
                             break;
@@ -107,7 +107,7 @@ public class Board {
             for(int j = 0; j < SIZE; j++){
                 rowSum+= this.board[i][j];
             }
-            if(rowSum == 3*X || rowSum == 3*Y){
+            if(rowSum == 3*X || rowSum == 3*O){
                 return true;
             }
         }
@@ -121,7 +121,7 @@ public class Board {
             for(int j = 0; j < SIZE; j++){
                 colSum += this.board[j][i];
             }
-            if(colSum == 3*X || colSum == 3*Y){
+            if(colSum == 3*X || colSum == 3*O){
                 return true;
             }
         }
@@ -133,7 +133,7 @@ public class Board {
         for(int i = 0; i < SIZE; i++){
             diagSum += this.board[i][i];
         }
-        return diagSum == 3*X || diagSum == 3*Y;
+        return diagSum == 3*X || diagSum == 3*O;
     }
     
     public boolean checkNegDiag(){
@@ -141,7 +141,7 @@ public class Board {
         for(int i = 0; i< SIZE; i++){
             diagSum += this.board[i][(SIZE - 1) - i];
         }
-        return diagSum == 3*X || diagSum == 3*Y;
+        return diagSum == 3*X || diagSum == 3*O;
     }
     
     private int countEmptySpaces(){

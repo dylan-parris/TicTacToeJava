@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package tic.tac.toe.java;
+
 import java.util.Scanner;
+
 /**
  *
  * @author Dylan
@@ -39,6 +41,7 @@ public class TicTacToeJava {
         System.out.println("--------------------------");
         System.out.println("1. Another person");
         System.out.println("2. Novice Computer Player");
+        System.out.println("3. Advanced Computer Player");
         
         System.out.println("Enter the cooresponding number: ");
         
@@ -50,14 +53,15 @@ public class TicTacToeJava {
             case 2:
                 player2 = new NoviceAI("");
                 break;
-
+            case 3:
+                player2 = new AdvancedAI("", Board.O);
         }
     }
     
     
     public static void gameplay(Board board){
         player1.setXorO(Board.X);
-        player2.setXorO(Board.Y);
+        player2.setXorO(Board.O);
         while (!board.checkForWin()){
             if(board.isBoardFull()){
                 System.out.println("Draw!");
@@ -89,7 +93,7 @@ public class TicTacToeJava {
     
     private static void playerTurn(Player player){
         int[] pMove = player.makeMove(board);
-        board.placeXorO(pMove, player.getXorO());
+        board.placePiece(pMove, player.getXorO());
         if(board.checkForWin()){
             System.out.println(player.getName() + " Wins!");
         }

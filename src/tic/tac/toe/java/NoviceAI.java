@@ -11,8 +11,7 @@ import java.util.Random;
  */
 public class NoviceAI implements Player{
     private String name;
-    private int peice;
-    //private Board board;
+    int peice;
     
     NoviceAI(String n){
         name = n;
